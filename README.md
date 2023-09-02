@@ -4,7 +4,7 @@
 1. [Introduction](#introduction)
 2. [How It Works](#how-it-works)
 3. [Requirements](#requirements)
-4. [PoC on XRPL](#proof-of-concept-proposal-on-xrpl)
+4. [PoC on XRPL](#proof-of-concept-proposal-for-xrpl)
 5. [Technology](#technology)
 6. [Data Management](#data-management)
 7. [Additional Sections](#additional-sections)
