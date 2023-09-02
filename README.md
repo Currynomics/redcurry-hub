@@ -58,6 +58,14 @@ This software has to successfully carry out the following requirements:
 
 # Proof of Concept Proposal for XRPL
 
+## Scope: 
+
+Issue Redcurry RWA backed stablecoins on XRP Ledger one way (Polygon to XRPL)
+
+## PoC Requirements:
+* Ability to issue Redcurry on XRPL as IOU token.
+* Ability to use already developed Governor, Assets and Token smart contracts on Polygon.
+
 ## Architecture Description
 ### Components
 1. **Redcurry Hub**: The on-chain supply and its underlying reserve asset control and administration software.
@@ -69,54 +77,61 @@ This software has to successfully carry out the following requirements:
 6. **Webhook Endpoint**: An endpoint in the Redcurry Hub that receives the Moralis webhook and issues IOUs on XRPL.
 7. **XRPL Javascript Client**: Used by the Redcurry Hub to issue IOUs on the XRP Ledger.
 
-### User Stories
+## User Stories
 
-#### 1) New Supply of Redcurry Needs to be Issued on XRPL
+### 1) New Supply of Redcurry Needs to be Issued on XRPL
 
 1. A user interacts with the Redcurry Hub to initiate the issuance of new Redcurry tokens on XRPL.
 2. The Hub interacts with the Governor and Assets contracts on Polygon to validate and approve the issuance.
 
-#### 2) New Asset Comes into Redcurry
+### 2) New Asset Comes into Redcurry
 
 1. An external event (e.g., cash payment) triggers the need for new assets to be added to the Redcurry reserve.
 2. The Assets contract on Polygon is updated to reflect the new asset.
 
-#### 3) New Asset is Created or Existing Asset is Updated
+### 3) New Asset is Created or Existing Asset is Updated
 
 1. The user marks this Redcurry to be issued on XRPL by setting the recipient (mint direct) to the XRPL Bridge Smart Contract on Polygon (RedBridge).
 
-#### 4) Governor Contract is Transacted With
+### 4) Governor Contract is Transacted With
 
 1. The Governor contract on Polygon is transacted with, and the new supply of Redcurry tokens is sent to the RedBridge.
 
-#### 5) Bridge Locks Redcurry on Polygon
+### 5) Bridge Locks Redcurry on Polygon
 
 1. RedBridge locks the Redcurry tokens on Polygon and publishes an event.
 
-#### 6) Event is Captured by Moralis Stream
+### 6) Event is Captured by Moralis Stream
 
 1. The Moralis stream captures the event published by RedBridge and triggers a webhook.
 
-#### 7) Webhook Calls Redcurry Hub's Endpoint
+### 7) Webhook Calls Redcurry Hub's Endpoint
 
 1. The webhook calls the Redcurry Hub's endpoint (e.g., `/moralis/stream/bridge/p2x`).
 
-#### 8) Issue New IOUs on XRPL
+### 8) Issue New IOUs on XRPL
 
 1. Using the XRPL Javascript Client, the Redcurry Hub issues new IOUs (Redcurry on XRPL) to the recipient wallet on XRPL.
 
-### Constraints & Limitations
+## Constraints & Limitations
 
 1. The supply of Redcurry tokens is only controlled by the Governor smart contract and indirectly via the Assets smart contract. No duplication of this business logic on XRPL is desired at this phase.
 2. Redcurry will be issued on Polygon first, locked into RedBridge, and then issued as an IOU on XRPL when the bridge lock is confirmed via a contract event.
 3. The bridge is one-way during the PoC phase; Redcurry can be moved to XRPL but not back.
 
-### Future Considerations
+**NB! Although the bridge is built on-way during PoC phase, the RedBridge must have the ability to unlock Redcurry!**
+
+## Future Considerations
 
 1. Develop the bridge's second lane to enable movement from XRPL back to Polygon.
 2. Become a stablecoin issuer on XRPL to gain several business advantages.
 
 By following this architecture and these user stories, the PoC aims to demonstrate the feasibility of issuing Redcurry as an IOU on the XRP Ledger while maintaining the existing smart contract infrastructure on Polygon.
+
+## Steps to implement PoC
+1. Create an account on the XRPL,
+2. Create RedBridge smart contract on Polygon.
+3. Integrate Redcurry Hub with XRPL using XRPL JS Client
 
 
 # Technology
