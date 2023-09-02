@@ -1,0 +1,146 @@
+@import '~payload/scss';
+
+.vert-separator {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.app-msg-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 400;
+    color: #283047;
+    margin-bottom: 1em;
+    font-size: 12px;
+}
+
+
+.app-msg-container.hidden {
+    display: none;
+}
+
+.app-message {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.r-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 1em;
+}
+
+.icon-warn {
+    background-image: url('../../assets/icons/warn.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-info {
+    background-image: url('../../assets/icons/info.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-err {
+    background-image: url('../../assets/icons/error.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-check {
+    background-image: url('../../assets/icons/check.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-wait {
+    background-image: url('../../assets/icons/wait.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.icon-up {
+    background-image: url('../../assets/icons/iconUp.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.app-msg-container.warnMsg {
+    background: #FFF3D6;
+}
+
+.app-msg-container.errMsg {
+    background: #faa2ac;
+}
+
+.app-msg-container.infoMsg {
+    background: #E4F3FB;
+}
+
+.app-msg-container.guideMsg {
+    background: #d0d0d0;
+}
+
+.app-msg-container.waitMsg {
+    background: #e6c5ff;
+}
+
+.warn {
+    margin: 0;
+    padding: 0;
+    border: $style-stroke-width-m solid #fff;
+}
+
+.custom-color-picker {
+    &__btn.btn {
+        margin: base(.25);
+
+        &:first-of-type {
+            margin-left: unset;
+        }
+    }
+
+    &__input {
+        // Payload exports a mixin from the vars file for quickly applying formInput rules to the class for our input
+        @include formInput
+    }
+
+    &__colors {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.chip {
+    border-radius: 50%;
+    border: $style-stroke-width-m solid #fff;
+    height: base(1.25);
+    width: base(1.25);
+    margin-right: base(.5);
+    box-shadow: none;
+
+    &--selected {
+        box-shadow: 0 0 0 $style-stroke-width-m $color-dark-gray;
+    }
+
+    &--clickable {
+        cursor: pointer;
+    }
+}

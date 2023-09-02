@@ -1,0 +1,382 @@
+{
+    "confirmed": false,
+    "chainId": "0x13881",
+    "abi": [
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "creator",
+                    "type": "address"
+                }
+            ],
+            "name": "AssetBurned",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "creator",
+                    "type": "address"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "sourceId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address[]",
+                            "name": "managers",
+                            "type": "address[]"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "supplyChanging",
+                            "type": "bool"
+                        },
+                        {
+                            "components": [
+                                {
+                                    "internalType": "enum Types.Currency",
+                                    "name": "currency",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oav",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "coa",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "int256",
+                                    "name": "ral",
+                                    "type": "int256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oa",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oavi",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oavr",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "bd",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint16",
+                                    "name": "oi",
+                                    "type": "uint16"
+                                }
+                            ],
+                            "internalType": "struct Types.Value",
+                            "name": "value",
+                            "type": "tuple"
+                        },
+                        {
+                            "internalType": "enum Types.AssetType",
+                            "name": "assetType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "enum Types.AssetSubType",
+                            "name": "assetSubType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "enum Types.AssetStatus",
+                            "name": "status",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "enum Types.OwnershipType",
+                            "name": "ownershipType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "lastAuditedAt",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "externalId",
+                            "type": "string"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct Types.Asset",
+                    "name": "asset",
+                    "type": "tuple"
+                }
+            ],
+            "name": "AssetCreated",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "uint256",
+                    "name": "tokenId",
+                    "type": "uint256"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "creator",
+                    "type": "address"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "uint256",
+                            "name": "tokenId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "sourceId",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "creator",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "address[]",
+                            "name": "managers",
+                            "type": "address[]"
+                        },
+                        {
+                            "internalType": "bool",
+                            "name": "supplyChanging",
+                            "type": "bool"
+                        },
+                        {
+                            "components": [
+                                {
+                                    "internalType": "enum Types.Currency",
+                                    "name": "currency",
+                                    "type": "uint8"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oav",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "coa",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "int256",
+                                    "name": "ral",
+                                    "type": "int256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oa",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oavi",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "oavr",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint256",
+                                    "name": "bd",
+                                    "type": "uint256"
+                                },
+                                {
+                                    "internalType": "uint16",
+                                    "name": "oi",
+                                    "type": "uint16"
+                                }
+                            ],
+                            "internalType": "struct Types.Value",
+                            "name": "value",
+                            "type": "tuple"
+                        },
+                        {
+                            "internalType": "enum Types.AssetType",
+                            "name": "assetType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "owner",
+                            "type": "address"
+                        },
+                        {
+                            "internalType": "enum Types.AssetSubType",
+                            "name": "assetSubType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "name",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "enum Types.AssetStatus",
+                            "name": "status",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "enum Types.OwnershipType",
+                            "name": "ownershipType",
+                            "type": "uint8"
+                        },
+                        {
+                            "internalType": "uint256",
+                            "name": "lastAuditedAt",
+                            "type": "uint256"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "externalId",
+                            "type": "string"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct Types.Asset",
+                    "name": "asset",
+                    "type": "tuple"
+                }
+            ],
+            "name": "AssetUpdated",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address[]",
+                    "name": "previousGovernors",
+                    "type": "address[]"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address[]",
+                    "name": "newGovernors",
+                    "type": "address[]"
+                }
+            ],
+            "name": "GovernorshipTransferred",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "previousOwner",
+                    "type": "address"
+                },
+                {
+                    "indexed": true,
+                    "internalType": "address",
+                    "name": "newOwner",
+                    "type": "address"
+                }
+            ],
+            "name": "OwnershipTransferred",
+            "type": "event"
+        }
+    ],
+    "streamId": "bbb7d8c1-7fc3-44df-b8e8-f183b661bde7",
+    "tag": "assets",
+    "retries": 0,
+    "block": {
+        "number": "34344049",
+        "hash": "0xa5a40e9c4663fbfa18e7d76d589740136f8a2069d2d23f446af67d0eb0b1aea4",
+        "timestamp": "1681435823"
+    },
+    "logs": [
+        {
+            "logIndex": "11",
+            "transactionHash": "0x447eb5e2c7fa2c29eb49a6f3a87eccf34be3c1a4d819a86fc284e4c7695712eb",
+            "address": "0xc425816acd422055362ecee3ae5bff38030068ee",
+            "data": "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050bef9b58dc9d9083272a2d850e4f97cb691d3ff00000000000000000000000000000000000000000000000000000000000002c000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000036360d400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000271000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001ed5618f1b4483f2cb77e0bd30d982b56193f16a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000360000000000000000000000000000000000000000000000000000000000000000200000000000000000000000050bef9b58dc9d9083272a2d850e4f97cb691d3ff0000000000000000000000001ed5618f1b4483f2cb77e0bd30d982b56193f16a000000000000000000000000000000000000000000000000000000000000000c4d79206361736820233031310000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001d636173685f397775766f3538623032643065686765766d6c6e6d6f756f000000",
+            "topic0": "0xba52f4c4f97fab0c4550ddee240f74456c645394179e8a94dd78c5022f6c3804",
+            "topic1": "0x0000000000000000000000000000000000000000000000000000000000000008",
+            "topic2": "0x00000000000000000000000050bef9b58dc9d9083272a2d850e4f97cb691d3ff",
+            "topic3": null
+        }
+    ],
+    "txs": [],
+    "txsInternal": [],
+    "erc20Transfers": [],
+    "erc20Approvals": [],
+    "nftTokenApprovals": [],
+    "nftApprovals": {
+        "ERC721": [],
+        "ERC1155": []
+    },
+    "nftTransfers": [],
+    "nativeBalances": []
+}
