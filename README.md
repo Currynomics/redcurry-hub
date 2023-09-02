@@ -133,6 +133,10 @@ By following this architecture and these user stories, the PoC aims to demonstra
 2. Create RedBridge smart contract on Polygon.
 3. Integrate Redcurry Hub with XRPL using XRPL JS Client
 
+## Sources and link
+[Issue Fungible Tokens on XRPL](https://xrpl.org/issue-a-fungible-token.html)
+[Trust Lines](https://xrpl.org/trust-lines-and-issuing.html)
+[Learn to code with XRPL](https://learn.xrpl.org/course/code-with-the-xrpl/)
 
 # Technology
 ## Asset Tracking Architecture
