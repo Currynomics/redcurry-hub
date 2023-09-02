@@ -129,9 +129,9 @@ Issue Redcurry RWA backed stablecoins on XRP Ledger one way (Polygon to XRPL)
 By following this architecture and these user stories, the PoC aims to demonstrate the feasibility of issuing Redcurry as an IOU on the XRP Ledger while maintaining the existing smart contract infrastructure on Polygon.
 
 ## Steps to implement PoC
-1. Create an account on the XRPL,
-2. Create RedBridge smart contract on Polygon.
-3. Integrate Redcurry Hub with XRPL using XRPL JS Client
+1. Create an account on the XRPL. Status: DONE
+2. Create RedBridge smart contract on Polygon. Status: BACKLOG
+3. Integrate Redcurry Hub with XRPL using XRPL JS Client. [Status: Started](src/core/third-party/xrpl)
 
 ## Sources and link
 [Issue Fungible Tokens on XRPL](https://xrpl.org/issue-a-fungible-token.html)
