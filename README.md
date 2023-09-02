@@ -4,10 +4,11 @@
 1. [Introduction](#introduction)
 2. [How It Works](#how-it-works)
 3. [Requirements](#requirements)
-4. [Technology](#technology)
-5. [Data Management](#data-management)
-6. [Additional Sections](#additional-sections)
-7. [License](#license)
+4. [PoC on XRPL](#proof-of-concept-proposal-on-xrpl)
+5. [Technology](#technology)
+6. [Data Management](#data-management)
+7. [Additional Sections](#additional-sections)
+8. [License](#license)
 
 # Introduction
 Redcurry's asset management and tokenization platform powers the Redcurry digital currency backed by commercial real estate assets. This README provides an overview of the Redcurry system, its smart contracts, and how it maintains a stable backing of Redcurry and the commercial real estate portfolio.
@@ -55,6 +56,69 @@ This software has to successfully carry out the following requirements:
 ## Constraints
 * Act as an interface between blockchain and user and not attempt to simulate any accounting software.
 
+# Proof of Concept Proposal for XRPL
+
+## Architecture Description
+### Components
+1. **Redcurry Hub**: The on-chain supply and its underlying reserve asset control and administration software.
+2. **Governor Contract**: Smart contract on Polygon that controls the supply of Redcurry tokens.
+3. **Assets Contract**: Smart contract on Polygon that manages the underlying assets for Redcurry.
+3. **Token Contract**: Smart contract (ERC20) on Polygon that is the Redcurry currency.
+4. **RedBridge**: A bridge smart contract on Polygon that locks Redcurry tokens and triggers an event for issuing IOUs on XRPL.
+5. **Moralis Stream**: Captures the event triggered by RedBridge and triggers a webhook.
+6. **Webhook Endpoint**: An endpoint in the Redcurry Hub that receives the Moralis webhook and issues IOUs on XRPL.
+7. **XRPL Javascript Client**: Used by the Redcurry Hub to issue IOUs on the XRP Ledger.
+
+### User Stories
+
+#### 1) New Supply of Redcurry Needs to be Issued on XRPL
+
+1. A user interacts with the Redcurry Hub to initiate the issuance of new Redcurry tokens on XRPL.
+2. The Hub interacts with the Governor and Assets contracts on Polygon to validate and approve the issuance.
+
+#### 2) New Asset Comes into Redcurry
+
+1. An external event (e.g., cash payment) triggers the need for new assets to be added to the Redcurry reserve.
+2. The Assets contract on Polygon is updated to reflect the new asset.
+
+#### 3) New Asset is Created or Existing Asset is Updated
+
+1. The user marks this Redcurry to be issued on XRPL by setting the recipient (mint direct) to the XRPL Bridge Smart Contract on Polygon (RedBridge).
+
+#### 4) Governor Contract is Transacted With
+
+1. The Governor contract on Polygon is transacted with, and the new supply of Redcurry tokens is sent to the RedBridge.
+
+#### 5) Bridge Locks Redcurry on Polygon
+
+1. RedBridge locks the Redcurry tokens on Polygon and publishes an event.
+
+#### 6) Event is Captured by Moralis Stream
+
+1. The Moralis stream captures the event published by RedBridge and triggers a webhook.
+
+#### 7) Webhook Calls Redcurry Hub's Endpoint
+
+1. The webhook calls the Redcurry Hub's endpoint (e.g., `/moralis/stream/bridge/p2x`).
+
+#### 8) Issue New IOUs on XRPL
+
+1. Using the XRPL Javascript Client, the Redcurry Hub issues new IOUs (Redcurry on XRPL) to the recipient wallet on XRPL.
+
+### Constraints & Limitations
+
+1. The supply of Redcurry tokens is only controlled by the Governor smart contract and indirectly via the Assets smart contract. No duplication of this business logic on XRPL is desired at this phase.
+2. Redcurry will be issued on Polygon first, locked into RedBridge, and then issued as an IOU on XRPL when the bridge lock is confirmed via a contract event.
+3. The bridge is one-way during the PoC phase; Redcurry can be moved to XRPL but not back.
+
+### Future Considerations
+
+1. Develop the bridge's second lane to enable movement from XRPL back to Polygon.
+2. Become a stablecoin issuer on XRPL to gain several business advantages.
+
+By following this architecture and these user stories, the PoC aims to demonstrate the feasibility of issuing Redcurry as an IOU on the XRP Ledger while maintaining the existing smart contract infrastructure on Polygon.
+
+
 # Technology
 ## Asset Tracking Architecture
 The primary purpose of on-chain asset tracking is to introduce transparency, decentralization, and immutability. All smart contracts are developed on an EVM-compatible blockchain using the ERC20 and ERC720 standards. Development of XRPL support has started. 
@@ -62,8 +126,9 @@ The primary purpose of on-chain asset tracking is to introduce transparency, dec
 ## Tech Stack
 * Frameworks: PayloadCMS
 * Services: Alchemy, Moralis
-* Languages: Javascript: NodeJS, Typescript, React
+* Languages: Javascript: NodeJS, Typescript, ReactJS
 * Orchestration: Docker
+* Libraries: XRPL JS Client, Fireblocks.
 
 # Data Management
 
