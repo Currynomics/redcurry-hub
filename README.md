@@ -5,14 +5,16 @@
 2. [How It Works](#how-it-works)
 3. [Requirements](#requirements)
 4. [Redcurry on XRPL](#redcurry-on-xrpl)
-5. [Future on XRPL](#future-proposals-on-xrpl)
-6. [Technology](#technology)
-7. [Data Management](#data-management)
-8. [Additional Sections](#additional-sections)
-9. [License](#license)
+5. [Technology](#technology)
+6. [Data Management](#data-management)
+7. [Additional Sections](#additional-sections)
+8. [License](#license)
 
 # Introduction
 Redcurry's asset management and tokenization platform powers the Redcurry digital currency backed by commercial real estate assets. This README provides an overview of the Redcurry system, its smart contracts, and how it maintains a stable backing of Redcurry and the commercial real estate portfolio.
+
+For detailed documentation or whitepaper, please visit [Redcurry Docs](https://docs.redcurry.co).
+
 
 ### What Redcurry system aims to solve?
 Redcurry offers a stable store of value and its transfer a for the general public.
@@ -59,16 +61,25 @@ This software has to successfully carry out the following requirements:
 
 # Redcurry on XRPL
 
-## Proof of Concept Scope 
+## Roadmap
+Our journey begins with Phase 0, a Proof of Concept aimed at issuing Redcurry as an IOU token on the XRP Ledger (XRPL) via a bridge from Polygon. This sets the stage for Phase 1, a four-month endeavor focused on DeFi services integration. Here, we'll establish a two-way bridging process and integrate Redcurry into XRPL-based lending platforms, enabling it to serve as an alternative asset class in various financial products.
 
-Issue Redcurry RWA backed stablecoins on XRP Ledger one way (Polygon to XRPL)
+Phase 2 shifts our attention to practical applications, specifically the development of an escrow payments app. This will allow Redcurry to be utilized in transactions requiring secure, stable means of exchange, such as rental deposits.
 
-### PoC Requirements:
+In Phase 3, we aim for Scaling and Expansion, focusing on becoming a recognized stablecoin issuer on XRPL and exploring the extension of Redcurry's governance features to the XRPL community. This phase will also see us facilitating cross-border real estate transactions and creating XRPL-based solutions for real estate supply chain finance.
+
+Finally, Phase 4 is all about Community and Ecosystem Development. We plan to roll out community tools for proposing and voting on new features, release APIs and SDKs for third-party development, and leverage Redcurry for social impact projects and retail adoption. This phase encapsulates our commitment to making Redcurry a community-driven, widely accepted, and socially impactful digital currency.
+
+
+## Phase 0: Proof of Concept
+### Scope
+Issue Redcurry on XRP Ledger one way (Polygon to XRPL)
+
+### Requirements:
 * Ability to issue Redcurry on XRPL as IOU token.
 * Ability to use already developed Governor, Assets and Token smart contracts on Polygon.
 
-## Architecture Description
-### Components
+### Architecture Description
 1. **Redcurry Hub**: The on-chain supply and its underlying reserve asset control and administration software.
 2. **Governor Contract**: Smart contract on Polygon that controls the supply of Redcurry tokens.
 3. **Assets Contract**: Smart contract on Polygon that manages the underlying assets for Redcurry.
@@ -78,90 +89,87 @@ Issue Redcurry RWA backed stablecoins on XRP Ledger one way (Polygon to XRPL)
 6. **Webhook Endpoint**: An endpoint in the Redcurry Hub that receives the Moralis webhook and issues IOUs on XRPL.
 7. **XRPL Javascript Client**: Used by the Redcurry Hub to issue IOUs on the XRP Ledger.
 
-## User Stories
+### User Stories
 
-### 1) New Supply of Redcurry Needs to be Issued on XRPL
+#### 1) New Supply of Redcurry Needs to be Issued on XRPL
 
-1. A user interacts with the Redcurry Hub to initiate the issuance of new Redcurry tokens on XRPL.
-2. The Hub interacts with the Governor and Assets contracts on Polygon to validate and approve the issuance.
+* A user interacts with the Redcurry Hub to initiate the issuance of new Redcurry tokens on XRPL.
+* The Hub interacts with the Governor and Assets contracts on Polygon to validate and approve the issuance.
 
-### 2) New Asset Comes into Redcurry
+#### 2) New Asset Comes into Redcurry
 
-1. An external event (e.g., cash payment) triggers the need for new assets to be added to the Redcurry reserve.
-2. The Assets contract on Polygon is updated to reflect the new asset.
+* An external event (e.g., cash payment) triggers the need for new assets to be added to the Redcurry reserve.
+* The Assets contract on Polygon is updated to reflect the new asset.
 
-### 3) New Asset is Created or Existing Asset is Updated
+#### 3) New Asset is Created or Existing Asset is Updated
 
-1. The user marks this Redcurry to be issued on XRPL by setting the recipient (mint direct) to the XRPL Bridge Smart Contract on Polygon (RedBridge).
+* The user marks this Redcurry to be issued on XRPL by setting the recipient (mint direct) to the XRPL Bridge Smart Contract on Polygon (RedBridge).
 
-### 4) Governor Contract is Transacted With
+#### 4) Governor Contract is Transacted With
 
-1. The Governor contract on Polygon is transacted with, and the new supply of Redcurry tokens is sent to the RedBridge.
+* The Governor contract on Polygon is transacted with, and the new supply of Redcurry tokens is sent to the RedBridge.
 
-### 5) Bridge Locks Redcurry on Polygon
+#### 5) Bridge Locks Redcurry on Polygon
 
-1. RedBridge locks the Redcurry tokens on Polygon and publishes an event.
+* RedBridge locks the Redcurry tokens on Polygon and publishes an event.
 
-### 6) Event is Captured by Moralis Stream
+#### 6) Event is Captured by Moralis Stream
 
-1. The Moralis stream captures the event published by RedBridge and triggers a webhook.
+* The Moralis stream captures the event published by RedBridge and triggers a webhook.
 
-### 7) Webhook Calls Redcurry Hub's Endpoint
+#### 7) Webhook Calls Redcurry Hub's Endpoint
 
-1. The webhook calls the Redcurry Hub's endpoint (e.g., `/moralis/stream/bridge/p2x`).
+* The webhook calls the Redcurry Hub's endpoint (e.g., `/moralis/stream/bridge/p2x`).
 
-### 8) Issue New IOUs on XRPL
+#### 8) Issue New IOUs on XRPL
 
-1. Using the XRPL Javascript Client, the Redcurry Hub issues new IOUs (Redcurry on XRPL) to the recipient wallet on XRPL.
+* Using the XRPL Javascript Client, the Redcurry Hub issues new IOUs (Redcurry on XRPL) to the recipient wallet on XRPL.
 
-## Constraints & Limitations
+### Constraints & Limitations
 
 1. The supply of Redcurry tokens is only controlled by the Governor smart contract and indirectly via the Assets smart contract. No duplication of this business logic on XRPL is desired at this phase.
 2. Redcurry will be issued on Polygon first, locked into RedBridge, and then issued as an IOU on XRPL when the bridge lock is confirmed via a contract event.
-3. The bridge is one-way during the PoC phase; Redcurry can be moved to XRPL but not back.
+3. The bridge is one-way during the PoC phase; Redcurry can be moved to XRPL but not back. That said, Bridge contract supports two-way movement.
 
-**NB! Although the bridge is built on-way during PoC phase, the RedBridge must have the ability to unlock Redcurry!**
-
-## Future Considerations
-
-1. Develop the bridge's second lane to enable movement from XRPL back to Polygon.
+### Future Considerations
+1. Develop the process to enable movement from XRPL back to Polygon (complete bridge process).
 2. Become a stablecoin issuer on XRPL to gain several business advantages.
 
 By following this architecture and these user stories, the PoC aims to demonstrate the feasibility of issuing Redcurry as an IOU on the XRP Ledger while maintaining the existing smart contract infrastructure on Polygon.
 
-## Steps to implement PoC
+### Steps to implement PoC
 1. Create an account on the XRPL. Status: DONE
 2. Create RedBridge smart contract on Polygon. Status: BACKLOG
 3. Integrate Redcurry Hub with XRPL using XRPL JS Client. [Status: Started](src/core/third-party/xrpl)
 
-# Future Proposals on XRPL
-## Phase 1: Initial Integration and Issuance
-**Infrastructure Development**
-* Complete PoC Implementation: Finalize the RedBridge smart contract on Polygon and complete the integration of the * Redcurry Hub with XRPL.
-* Governor Contract Adaptation: Ensure the Governor Contract on Polygon can interact seamlessly with the RedBridge for issuing Redcurry on XRPL.
-* Assets Contract Update: Adapt the Assets Contract to recognize and manage assets issued on XRPL.
 
-**Use-Cases**
-* Cross-Chain Liquidity: Enable users to tap into liquidity on both Polygon and XRPL, enhancing the utility of Redcurry.
-* RWA Tokenization: Explore the possibility of tokenizing real world assets on XRPL, backed by Redcurry technology and legal stack.
+## Phase 1: Unleashing DeFi Synergies
+* Perfecting the PoC: second lane for the bridge.
+* Expanding Oracle Partnerships: We're not just stopping at one. We're integrating with additional oracles to bring Redcurry's real-time value to the XRPL ecosystem.
+* DeFi Ecosystem Integration: We're developing and aligning with existing DeFi services to unlock Redcurry's potential in lending and borrowing landscapes.
 
-## Phase 2: Enhancing Functionality and Usability
-**Infrastructure Development**
-* Two-Way Bridge: Develop the second lane of the bridge to enable Redcurry movement from XRPL back to Polygon.
-* Smart Contract Optimization: Refine the existing smart contracts to improve efficiency and reduce gas costs.
+**Innovative Use-Cases**
+* Cross-Chain Liquidity Unleashed: We're empowering our users to tap into liquidity pools across both Polygon and XRPL, amplifying Redcurry's utility and reach.
+* Real-World Asset Tokenization: We're exploring groundbreaking avenues to tokenize real-world assets on XRPL, all backed by Redcurry's robust technology and legal framework.
 
-**Use-Cases**
-* Payment Gateways: Integrate Redcurry with XRPL-based payment gateways, offering a stable, real estate-backed payment option.
-* Decentralized Finance (DeFi): Enable Redcurry to be used in XRPL-based DeFi products, such as lending platforms or yield farms.
 
-## Phase 3: Scaling and Expansion
-**Infrastructure Development**
-* Stablecoin Issuer on XRPL: Become a recognized stablecoin issuer on XRPL to gain business advantages like lower transaction fees and higher visibility.
-* Governance on XRPL: Explore the possibility of extending Redcurry governance features to XRPL, allowing for more community involvement.
+## Phase 2: Revolutionizing Escrow Payments
+* Pioneering a Escrow Payments App: We're crafting a groundbreaking web3 application that enables value exchanges in scenarios requiring escrow, such as rental deposits, all powered by Redcurry's stable, real estate-backed technology.
 
-**Use-Cases**
-* Global Real Estate Market: Facilitate cross-border real estate transactions through Redcurry on XRPL.
-* Supply Chain Finance: Leverage Redcurry to create XRPL-based solutions for real estate supply chain finance.
+**Trailblazing Use-Cases**
+* Escrow Payment Transformation: We're integrating Redcurry with XRPL-based payment gateways, offering not just a stable but a real estate-backed payment solution that redefines secure and transparent transactions.
+* Dynamic Escrow Options: Beyond traditional payment gateways, we're exploring the potential for customizable escrow services that can adapt to various real estate transaction scenarios, all backed by Redcurry's secure and transparent technology.
+* This phase is not just an upgrade; it's a transformative leap that aims to redefine how escrow payments function in the real estate industry. We're not just solving problems; we're setting new standards.
+
+
+
+## Phase 3: Scaling Beyond Horizons
+* Ascend as an XRPL Stablecoin Authority: Aim to become a distinguished stablecoin issuer on the XRPL ecosystem, unlocking business perks such as reduced transaction fees and elevated brand visibility.
+* Extend Governance to XRPL: Investigate avenues to broaden Redcurry's decentralized governance features onto XRPL, fostering even greater community participation and decision-making.
+
+**Expanding Use-Cases**
+* Global Real Estate Frontier: Enable seamless cross-border real estate transactions by utilizing Redcurry's stablecoin capabilities on XRPL.
+* Supply Chain Financial Solutions: Harness the power of Redcurry to architect XRPL-integrated solutions tailored for the real estate supply chain finance sector.
 
 ## Phase 4: Community and Ecosystem Development
 **Infrastructure Development**
@@ -173,6 +181,7 @@ By following this architecture and these user stories, the PoC aims to demonstra
 * Retail Adoption: Partner with retail platforms to accept Redcurry, making it easier for the average consumer to engage with real estate-backed digital currency.
 
 By following this roadmap, Redcurry aims to not only prove the concept but also to build a robust, scalable, and community-driven ecosystem around its XRPL integration.
+
 
 ## Sources and link
 [Issue Fungible Tokens on XRPL](https://xrpl.org/issue-a-fungible-token.html)
